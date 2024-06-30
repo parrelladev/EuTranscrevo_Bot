@@ -1,2 +1,2 @@
 replicate
-telebot
+telebot2
