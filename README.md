@@ -6,7 +6,6 @@ Este bot Telegram foi desenvolvido para transcrever áudios enviados pelos usuá
 
 Para instalar as dependências necessárias, execute o seguinte comando:
 
-```bash
 pip3 install -U -r requirements.txt
 
 Certifique-se de que todas as dependências especificadas em requirements.txt estejam atualizadas.
