@@ -1,9 +1,9 @@
 Bot de Transcrição de Áudio
 ===========================
 
-![WhisperAudioBot](https://github.com/parrelladev/CartomanteTarot_Bot/assets/126002318/96500a0d-92fb-4d46-923c-f8ddda593e48)
-
 Este bot Telegram foi desenvolvido para transcrever áudios enviados pelos usuários usando a API da OpenAI via Replicate.
+
+![WhisperAudioBot](https://raw.githubusercontent.com/parrelladev/WhisperAudioBot/main/Print.png)
 
 Instalação
 ----------
