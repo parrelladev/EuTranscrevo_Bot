@@ -1,3 +1,3 @@
-BOT_TOKEN = '<seu_telegram_bot_token>'
-REPLICATE_OPENAI_RUN = '<seu_replicate_openai_run_id>'
-REPLICATE_API_TOKEN = '<seu_replicate_api_token>'
+BOT_TOKEN = '6461866181:AAGG87TTLiUY7cje5s-5nfDhLwFeBz6vjBc'
+REPLICATE_OPENAI_RUN = 'openai/whisper:4d50797290df275329f202e48c76360b3f22b08d28c196cbc54600319435f8d2'
+REPLICATE_API_TOKEN = 'r8_b5RPPeNIuj4ChDY3pDDDs32c2kFsaD80mrzaI'
