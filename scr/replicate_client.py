@@ -1,5 +1,5 @@
 import replicate
-from APIs import REPLICATE_API_TOKEN, REPLICATE_OPENAI_RUN
+from api_token import REPLICATE_API_TOKEN, REPLICATE_OPENAI_RUN
 
 class ReplicateClient:
     def __init__(self, api_token=REPLICATE_API_TOKEN):
