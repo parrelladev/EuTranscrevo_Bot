@@ -1,7 +1,7 @@
 import os
 import requests
 from replicate_client import ReplicateClient
-from errors import handle_unsupported_file_type_error, handle_unknown_error
+from errors import error
 from api_token import BOT_TOKEN
 
 class AudioHandler:
@@ -13,7 +13,7 @@ class AudioHandler:
         try:
             file_id = self.get_file_id(message)
             if not file_id:
-                handle_unsupported_file_type_error(self.bot, message)
+                error(self.bot, message)
                 return
 
             file_info = self.bot.get_file(file_id)
@@ -36,7 +36,7 @@ class AudioHandler:
         
         except Exception as e:
             print(f"Error: {e}")
-            handle_unknown_error(self.bot, message)
+            error.handle_unknown_error(self.bot, message)
 
     def get_file_id(self, message):
         if message.content_type == 'voice':
