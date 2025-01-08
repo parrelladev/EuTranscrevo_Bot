@@ -2,7 +2,7 @@
 
 # Bot de Transcrição de Áudio
 
-Este bot Telegram foi desenvolvido para transcrever áudios enviados pelos usuários, utilizando a API da OpenAI via Replicate.
+Este bot Telegram foi desenvolvido para transcrever áudios enviados pelos usuários, utilizando o modelo Whisper da OpenAI via API do Replicate.
 
 ## Instalação
 
@@ -46,9 +46,8 @@ Substitua `<seu_telegram_bot_token>`, `<seu_replicate_openai_run_id>` e `<seu_re
 
 Para iniciar o bot, execute o script `main.py` (ou se estiver utilizando Docker, ele será executado automaticamente no container). O bot estará pronto para receber áudios em formatos como voz, áudio ou documento (no caso de alguns formatos enviados dessa forma). Ele processará a transcrição e enviará o texto transcrito de volta ao usuário no Telegram.
 
-## Funcionalidades
+## Plus
 
 -   Suporte para transcrição de áudios enviados como voz, áudio ou documento.
 -   Gerenciamento eficiente de feedback, ajustando-se ao tamanho do arquivo de áudio.
--   Integração com a API da OpenAI via Replicate para realizar a transcrição de áudio.
 -   Manipulação de erros, com envio de mensagens apropriadas ao usuário em caso de falha no processamento do áudio.
