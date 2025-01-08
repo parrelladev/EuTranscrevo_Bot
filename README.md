@@ -1,3 +1,4 @@
+<img src="EuTranscrevo_bot.gif">
 
 # Bot de Transcrição de Áudio
 
