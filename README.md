@@ -1,8 +1,8 @@
-<img src="EuTranscrevo_bot.gif" width="400">
-
 # Bot de Transcrição de Áudio
 
 Este bot Telegram foi desenvolvido para transcrever áudios enviados pelos usuários, utilizando o modelo Whisper da OpenAI via API do Replicate.
+
+<img src="EuTranscrevo_bot.gif" width="400">
 
 ## Instalação
 
