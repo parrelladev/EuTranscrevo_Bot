@@ -1,4 +1,4 @@
-<img src="EuTranscrevo_bot.gif" width="200">
+<img src="EuTranscrevo_bot.gif" width="400">
 
 # Bot de Transcrição de Áudio
 
