@@ -1,45 +1,53 @@
-Bot de Transcrição de Áudio
-===========================
+# Bot de Transcrição de Áudio
 
-Este bot Telegram foi desenvolvido para transcrever áudios enviados pelos usuários usando a API da OpenAI via Replicate.
+Este bot Telegram foi desenvolvido para transcrever áudios enviados pelos usuários, utilizando o modelo Whisper da OpenAI via API do Replicate.
 
-![WhisperAudioBot](https://raw.githubusercontent.com/parrelladev/WhisperAudioBot/main/Print.png)
+<img src="EuTranscrevo_bot.gif" width="400">
 
-Instalação
-----------
+## Instalação
+
+### Via Python
 
 Para instalar as dependências necessárias, execute o seguinte comando:
 
-```
-pip3 install -U -r requirements.txt
-```
+`pip3 install -U -r requirements.txt` 
 
-Certifique-se de que todas as dependências especificadas em `requirements.txt` estejam atualizadas.
+Certifique-se de que todas as dependências especificadas em `requirements.txt` estejam atualizadas.
 
-Configuração
-------------
+### Via Docker
 
-Antes de executar o bot, certifique-se de configurar os seguintes parâmetros em `APIs.py`:
+Para rodar o bot em um container Docker, siga os seguintes passos:
 
-Python
+1.  **Construir a imagem Docker:**
+    
+    No diretório do projeto, execute o comando
+        
+    `docker build -t whisperaudiobot .` 
+    
+2.  **Executar o container:**
+    
+    Após a construção da imagem, você pode rodar o container com o seguinte comando:
+        
+    `docker run -d -p 5000:5000 whisperaudiobot` 
+    
+    Isso vai iniciar o bot em um container Docker e mapeá-lo para a porta 5000. Você pode alterar a porta conforme necessário.
+    
+## Configuração
 
-```
-BOT_TOKEN = '<seu_telegram_bot_token>'
-REPLICATE_OPENAI_RUN = '<seu_replicate_openai_run_id>'
-REPLICATE_API_TOKEN = '<seu_replicate_api_token>'
-```
+Antes de executar o bot, certifique-se de configurar os seguintes parâmetros no arquivo `APIs.py`:
 
-Substitua `<seu_telegram_bot_token>`, `<seu_replicate_openai_run_id>` e `<seu_replicate_api_token>` pelos tokens e IDs apropriados.
+`BOT_TOKEN = '<seu_telegram_bot_token>'` 
+`REPLICATE_OPENAI_RUN = '<seu_replicate_openai_run_id>'` 
+`REPLICATE_API_TOKEN = '<seu_replicate_api_token>'` 
 
-Uso
----
+Substitua `<seu_telegram_bot_token>`, `<seu_replicate_openai_run_id>` e `<seu_replicate_api_token>` pelos tokens e IDs apropriados que você obteve ao configurar o bot no Telegram e na API do Replicate.
 
-Execute o script `main.py` para iniciar o bot. Ele espera receber áudios em formatos como voz, áudio ou documento (no caso de alguns formatos serem enviados dessa forma). O bot transcreverá o áudio para texto e enviará de volta ao usuário no Telegram.
+## Uso
 
-Funcionalidades
----------------
+Para iniciar o bot, execute o script `main.py` (ou se estiver utilizando Docker, ele será executado automaticamente no container). O bot estará pronto para receber áudios em formatos como voz, áudio ou documento (no caso de alguns formatos enviados dessa forma). Ele processará a transcrição e enviará o texto transcrito de volta ao usuário no Telegram.
 
--   Suporta transcrição de áudios enviados como voz, áudio ou documento.
--   Gerencia o feedback com base no tamanho do arquivo de áudio.
--   Utiliza a API da OpenAI via Replicate para realizar a transcrição.
--   Manipula erros e envia mensagens de erro quando ocorre algum problema durante o processamento do áudio.
+## Plus
+
+-   Suporte para transcrição de áudios enviados como voz, áudio ou documento.
+-   Gerenciamento eficiente de feedback, ajustando-se ao tamanho do arquivo de áudio.
+-   Manipulação de erros, com envio de mensagens apropriadas ao usuário em caso de falha no processamento do áudio.
