@@ -3,3 +3,4 @@ scr/APIs.py
 src/api_token.py
 venv/
 *.pyc
+bot.log
