@@ -8,6 +8,7 @@ WORKDIR /app
 COPY requirements.txt .
 
 # Instala as dependências do Python
+RUN apt-get update && apt-get install -y ffmpeg && rm -rf /var/lib/apt/lists/*
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copia a pasta src com o código do bot para o diretório de trabalho no container

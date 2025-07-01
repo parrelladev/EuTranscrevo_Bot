@@ -10,9 +10,10 @@ Este bot Telegram foi desenvolvido para transcrever áudios enviados pelos usuá
 
 Para instalar as dependências necessárias, execute o seguinte comando:
 
-`pip3 install -U -r requirements.txt` 
+`pip3 install -U -r requirements.txt`
 
 Certifique-se de que todas as dependências especificadas em `requirements.txt` estejam atualizadas.
+Além disso, o bot depende do `ffmpeg` para acelerar os áudios. Caso execute fora do Docker, instale o `ffmpeg` no seu sistema.
 
 ### Via Docker
 

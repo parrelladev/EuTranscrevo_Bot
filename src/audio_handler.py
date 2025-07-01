@@ -2,6 +2,7 @@ import os
 import requests
 import logging
 import time
+import subprocess
 from typing import Optional, Tuple
 from datetime import datetime
 from replicate_client import ReplicateClient
@@ -24,6 +25,7 @@ class AudioHandler:
         'audio/mpeg', 'audio/mp3', 'audio/wav', 'audio/ogg',
         'audio/x-wav', 'audio/x-mpeg', 'audio/x-mp3'
     }
+    SPEED_UP_FACTOR = 2.0
     MAX_FILE_SIZE = 20 * 1024 * 1024  # 20MB
     RATE_LIMIT_WINDOW = 60  # 1 minuto
     MAX_REQUESTS_PER_WINDOW = 5
@@ -91,8 +93,27 @@ class AudioHandler:
                 os.remove(local_file_path)
             return "", False
 
+    def speed_up_audio(self, input_path: str) -> str:
+        output_path = f"{input_path}_fast.mp3"
+        cmd = [
+            "ffmpeg",
+            "-i",
+            input_path,
+            "-filter:a",
+            f"atempo={self.SPEED_UP_FACTOR}",
+            "-ac",
+            "1",
+            "-b:a",
+            "64k",
+            output_path,
+            "-y",
+        ]
+        subprocess.run(cmd, check=True)
+        return output_path
+
     def process_audio(self, message):
         temp_file_path = None
+        accelerated_path = None
         user_id = message.from_user.id
         
         try:
@@ -125,13 +146,12 @@ class AudioHandler:
             sent_message = self.bot.send_message(message.chat.id, feedback_message)
 
             try:
-                if file_info.file_size > 10 * 1024 * 1024:
-                    temp_file_path, success = self.download_file(file_url, file_info.file_path)
-                    if not success:
-                        raise FileError("Falha ao baixar arquivo")
-                    output = self.replicate_client.transcribe_audio_file(temp_file_path)
-                else:
-                    output = self.replicate_client.transcribe_audio_url(file_url)
+                temp_file_path, success = self.download_file(file_url, file_info.file_path)
+                if not success:
+                    raise FileError("Falha ao baixar arquivo")
+
+                accelerated_path = self.speed_up_audio(temp_file_path)
+                output = self.replicate_client.transcribe_audio_file(accelerated_path)
 
                 transcription = self.get_transcription(output)
                 self.send_transcription(message.chat.id, transcription)
@@ -157,11 +177,12 @@ class AudioHandler:
             ErrorHandler.handle_unknown_error(self.bot, message)
         finally:
             # Limpar arquivos temporários
-            if temp_file_path and os.path.exists(temp_file_path):
-                try:
-                    os.remove(temp_file_path)
-                except Exception as e:
-                    logger.error(f"Erro ao remover arquivo temporário: {str(e)}")
+            for path in (accelerated_path, temp_file_path):
+                if path and os.path.exists(path):
+                    try:
+                        os.remove(path)
+                    except Exception as e:
+                        logger.error(f"Erro ao remover arquivo temporário: {str(e)}")
 
     def get_transcription(self, output: dict) -> str:
         try:
