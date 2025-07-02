@@ -2,4 +2,6 @@
 scr/APIs.py
 src/api_token.py
 venv/
+bot.log
+src/temp/
 *.pyc

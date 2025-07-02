@@ -1,53 +1,118 @@
-# Bot de Transcrição de Áudio
+# EuTranscrevoBot
 
 Este bot Telegram foi desenvolvido para transcrever áudios enviados pelos usuários, utilizando o modelo Whisper da OpenAI via API do Replicate.
 
 <img src="EuTranscrevo_bot.gif" width="400">
 
-## Instalação
+## 🚀 Pré-requisitos
 
-### Via Python
+- Ubuntu 20.04+ (ou qualquer Linux com Python 3.8+)
+- Python 3 e pip
+- ffmpeg
+- Conta no Telegram (para criar o bot)
+- Conta no Replicate (para transcrição)
 
-Para instalar as dependências necessárias, execute o seguinte comando:
+---
 
-`pip3 install -U -r requirements.txt` 
+## ⚙️ Instalação
 
-Certifique-se de que todas as dependências especificadas em `requirements.txt` estejam atualizadas.
+1. **Instale dependências do sistema:**
+   ```bash
+   sudo apt update
+   sudo apt install python3 python3-pip python3-venv ffmpeg -y
+   ```
 
-### Via Docker
+2. **Clone o repositório:**
+   ```bash
+   git clone <url-do-seu-repositorio>
+   cd EuTranscrevoBot
+   ```
 
-Para rodar o bot em um container Docker, siga os seguintes passos:
+3. **Crie e ative o ambiente virtual:**
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
 
-1.  **Construir a imagem Docker:**
-    
-    No diretório do projeto, execute o comando
-        
-    `docker build -t whisperaudiobot .` 
-    
-2.  **Executar o container:**
-    
-    Após a construção da imagem, você pode rodar o container com o seguinte comando:
-        
-    `docker run -d -p 5000:5000 whisperaudiobot` 
-    
-    Isso vai iniciar o bot em um container Docker e mapeá-lo para a porta 5000. Você pode alterar a porta conforme necessário.
-    
-## Configuração
+4. **Instale as dependências Python:**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-Antes de executar o bot, certifique-se de configurar os seguintes parâmetros no arquivo `APIs.py`:
+---
 
-`BOT_TOKEN = '<seu_telegram_bot_token>'` 
-`REPLICATE_OPENAI_RUN = '<seu_replicate_openai_run_id>'` 
-`REPLICATE_API_TOKEN = '<seu_replicate_api_token>'` 
+## 🔑 Configuração
 
-Substitua `<seu_telegram_bot_token>`, `<seu_replicate_openai_run_id>` e `<seu_replicate_api_token>` pelos tokens e IDs apropriados que você obteve ao configurar o bot no Telegram e na API do Replicate.
+1. **Crie o arquivo de credenciais:**
+   Crie o arquivo `src/api_token.py` com o seguinte conteúdo:
+   ```python
+   BOT_TOKEN = "seu_token_do_telegram"
+   REPLICATE_API_TOKEN = "seu_token_do_replicate"
+   REPLICATE_OPENAI_RUN = "seu_token_da_openAI"
+   ```
 
-## Uso
+2. **(Opcional) Ajuste as configurações em `src/config.py`:**
+   - Velocidade de áudio (`SPEED_MULTIPLIER`)
+   - Volume (`VOLUME_MULTIPLIER`)
+   - Bitrate (`BITRATE`)
+   - Tamanho mínimo para otimização (`MIN_FILE_SIZE_FOR_OPTIMIZATION`)
 
-Para iniciar o bot, execute o script `main.py` (ou se estiver utilizando Docker, ele será executado automaticamente no container). O bot estará pronto para receber áudios em formatos como voz, áudio ou documento (no caso de alguns formatos enviados dessa forma). Ele processará a transcrição e enviará o texto transcrito de volta ao usuário no Telegram.
+---
 
-## Plus
+## ▶️ Execução
 
--   Suporte para transcrição de áudios enviados como voz, áudio ou documento.
--   Gerenciamento eficiente de feedback, ajustando-se ao tamanho do arquivo de áudio.
--   Manipulação de erros, com envio de mensagens apropriadas ao usuário em caso de falha no processamento do áudio.
+1. **Ative o ambiente virtual (se ainda não estiver ativo):**
+   ```bash
+   source venv/bin/activate
+   ```
+
+2. **Execute o bot:**
+   ```bash
+   python src/main.py
+   ```
+
+3. **Envie um áudio para o bot no Telegram e veja a transcrição otimizada!**
+
+---
+
+## 🛡️ .gitignore recomendado
+
+```
+venv/
+__pycache__/
+bot.log
+src/temp/
+src/api_token.py
+```
+
+---
+
+## 📁 Estrutura mínima do projeto
+
+```
+EuTranscrevoBot/
+├── src/
+│   ├── main.py
+│   ├── bot.py
+│   ├── audio_handler.py
+│   ├── replicate_client.py
+│   ├── config.py
+│   ├── errors.py
+│   └── api_token.py
+├── requirements.txt
+├── .gitignore
+└── README.md
+```
+
+---
+
+## 💡 Dicas
+- O bot aceita qualquer formato de áudio suportado pelo ffmpeg.
+- O volume dos áudios é aumentado automaticamente (ajustável em `config.py`).
+- O arquivo `bot.log` registra todas as operações e pode ser útil para debug.
+- Para rodar em produção, use um serviço como systemd para manter o bot ativo.
+
+---
+
+## 📝 Licença
+MIT

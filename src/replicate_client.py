@@ -4,6 +4,7 @@ from typing import Any, Dict
 import requests
 from api_token import REPLICATE_API_TOKEN, REPLICATE_OPENAI_RUN
 from errors import APIError, ErrorHandler
+from config import TRANSCRIPTION
 
 class ReplicateClient:
     def __init__(self, api_token=REPLICATE_API_TOKEN, max_retries=3, retry_delay=2):
@@ -36,17 +37,19 @@ class ReplicateClient:
         
         raise APIError(f"Máximo de tentativas excedido. Último erro: {str(last_error)}")
 
-    def transcribe_audio_file(self, file_path: str, timeout: int = 300) -> Dict[str, Any]:
+    def transcribe_audio_file(self, file_path: str, timeout: int = None) -> Dict[str, Any]:
+        timeout = timeout or TRANSCRIPTION['TIMEOUT']
         def operation():
             with open(file_path, 'rb') as audio_file:
-                input_data = {"audio": audio_file, "language": "pt"}
+                input_data = {"audio": audio_file, "language": TRANSCRIPTION['DEFAULT_LANGUAGE']}
                 return self.client.run(REPLICATE_OPENAI_RUN, input=input_data, timeout=timeout)
         
         return self._execute_with_retry(operation)
 
-    def transcribe_audio_url(self, file_url: str, timeout: int = 300) -> Dict[str, Any]:
+    def transcribe_audio_url(self, file_url: str, timeout: int = None) -> Dict[str, Any]:
+        timeout = timeout or TRANSCRIPTION['TIMEOUT']
         def operation():
-            input_data = {"audio": file_url, "language": "pt"}
+            input_data = {"audio": file_url, "language": TRANSCRIPTION['DEFAULT_LANGUAGE']}
             return self.client.run(REPLICATE_OPENAI_RUN, input=input_data, timeout=timeout)
         
         return self._execute_with_retry(operation)
