@@ -1,7 +1,50 @@
-
-scr/APIs.py
-src/api_token.py
+# Ambientes virtuais
 venv/
-bot.log
-src/temp/
-*.pyc
+.env
+.env.*
+
+# Configurações do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Bytecode Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Arquivos de log
+*.log
+
+# Arquivos temporários
+temp/
+*.tmp
+*.temp
+
+# Cache do editor
+.vscode/
+.idea/
+
+# Arquivos criados automaticamente
+*.bak
+*.swp
+*.swo
+
+# Sessões antigas (caso ainda tenha do projeto antigo)
+sessao-whatsapp/
+
+# Backup de notebooks Jupyter (caso use futuramente)
+.ipynb_checkpoints/
+
+# PyInstaller
+build/
+dist/
+*.spec
+
+# Cache pip
+pip-wheel-metadata/
+*.egg-info/
+.eggs/
+
+# Mac/Linux lixo
+.cache/
+*.orig
