@@ -21,8 +21,8 @@ Um bot de Telegram que transcreve áudios e vídeos com fala usando o modelo **W
 ### 1. Clone o projeto
 
 ```bash
-git clone https://github.com/seu-usuario/EuTranscrevo_bot_telegram.git
-cd EuTranscrevo_bot_telegram
+git clone https://github.com/parrelladev/EuTranscrevo_Bot/
+cd EuTranscrevo_Bot
 ````
 
 ### 2. Instale as dependências
@@ -36,13 +36,13 @@ pip install -r requirements.txt
 #### Ubuntu/Debian:
 
 ```bash
-sudo apt install ffmpeg libmagic1
+sudo apt install ffmpeg telebot
 ```
 
 #### macOS:
 
 ```bash
-brew install ffmpeg libmagic
+brew install ffmpeg telebot
 ```
 
 ---
