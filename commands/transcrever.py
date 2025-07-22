@@ -46,8 +46,7 @@ def transcrever(bot, message):
             message.voice.file_id if message.voice else
             message.audio.file_id if message.audio else
             message.video.file_id if message.content_type == "video" else
-            message.video_note.file_id if message.video_note else
-            message.document.file_id if message.document else
+            message.document.file_id if message.content_type == "document" else
             None
         )
 
@@ -66,9 +65,7 @@ def transcrever(bot, message):
 
         if message.content_type == "video":
             ext = "mp4"
-        elif message.content_type == "video_note":
-            ext = "mp4"
-        elif message.content_type == "document":
+        elif message.document:
             ext = message.document.file_name.split('.')[-1] or "mp3"
         else:
             ext = AUDIO['optimization']['format']
