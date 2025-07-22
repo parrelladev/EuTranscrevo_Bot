@@ -12,6 +12,7 @@ Versão: 1.0.0
 
 import os
 import sys
+import re
 
 # Adiciona a raiz do projeto ao sys.path
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -22,16 +23,25 @@ from config import TELEGRAM_TOKEN, MESSAGES
 
 # Comandos
 from commands.transcrever import transcrever
+from commands.handle_links import transcrever_link
 from commands.boas_vindas import boas_vindas
 
 # Inicializa o bot
 bot = telebot.TeleBot(TELEGRAM_TOKEN)
 
+# Regex para URLs
+URL_REGEX = re.compile(
+    r'(https?://[^\s]+)'
+)
+
 # Handler de texto
 @bot.message_handler(content_types=['text'])
 def handle_text(message):
     try:
-        boas_vindas(bot, message)
+        if URL_REGEX.search(message.text):
+            transcrever_link(bot, message)
+        else:
+            boas_vindas(bot, message)
     except Exception as e:
         print("Erro ao processar texto:", e)
         bot.reply_to(message, MESSAGES['error'])
