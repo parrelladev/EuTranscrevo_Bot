@@ -37,7 +37,7 @@ def handle_text(message):
         bot.reply_to(message, MESSAGES['error'])
 
 # Handler de voz, áudio, vídeo, documento
-@bot.message_handler(content_types=['voice', 'audio', 'video', 'document'])
+@bot.message_handler(content_types=['voice', 'audio', 'video', 'video_note', 'document'])
 def handle_audio_or_video(message):
     try:
         print("🎧 Mídia recebida!")

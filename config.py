@@ -64,7 +64,7 @@ SECURITY = {
         "audio/mp3", "audio/wav", "audio/m4a", "audio/ogg",
         "audio/ogg; codecs=opus", "audio/aac", "audio/webm",
         "audio/opus", "audio/amr", "audio/3gpp",
-        "audio/mpeg", "audio/mp4"
+        "audio/mpeg", "audio/mp4", "video/mp4"
     ],
     "enableFileTypeValidation": True,
     "autoCleanup": True
