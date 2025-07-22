@@ -60,19 +60,19 @@ REPLICATE_TOKEN=seu_token_replicate
 
 ```
 📁 EuTranscrevo_bot_telegram/
-├── 📁 commands/ # 🧠 Comandos do bot
-│ ├── 📝 transcrever.py # Lógica principal de transcrição
-│ ├── 👋 boas_vindas.py # Mensagem de boas-vindas personalizada
-├── 📁 services/ # 🔧 Serviços externos
-│ ├── 🎛️ audio_optimizer.py # Otimização de áudio com FFmpeg
-│ ├── 📡 replicate_client.py # Integração com a API Replicate
-├── 📁 utils/ # 🧰 Funções utilitárias
-│ └── 📁 file_utils.py # Manipulação de arquivos temporários
-├── 📁 temp/ # 🗂️ Arquivos temporários de áudio
+├── 📁 commands/
+│ ├── 📝 transcrever.py
+│ ├── 👋 boas_vindas.py
+├── 📁 services/
+│ ├── 🎛️ audio_optimizer.py
+│ ├── 📡 replicate_client.py
+├── 📁 utils/ #
+│ └── 📁 file_utils.py
+├── 📁 temp/
 ├── ⚙️ config.py # Configurações centralizadas do bot
-├── 🚀 main.py # Inicialização e roteamento do bot
-├── 📦 requirements.txt # Dependências do projeto
-└── 📄 README.md # Documentação do projeto
+├── 🚀 main.py
+├── 📦 requirements.txt 
+└── 📄 README.md
 ```
 
 ---
@@ -119,6 +119,4 @@ MIT © [Seu Nome](https://github.com/parrelladev)
 ```
 🎙️ Olá, João! Mande um áudio para que eu possa transcrever.
 📝 Olá, esse é um exemplo de transcrição gerada automaticamente.
-```
-
 ```
