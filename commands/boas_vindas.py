@@ -10,5 +10,5 @@ def boas_vindas(bot, message):
         first_name = message.from_user.first_name or "amigo"
         bot.send_message(
             message.chat.id,
-            f"🎙️ Olá, {first_name}! Mande um áudio para que eu possa transcrever."
+            f"🎙️ Olá, {first_name}! Mande um áudio, vídeo ou link para que eu possa transcrever."
         )

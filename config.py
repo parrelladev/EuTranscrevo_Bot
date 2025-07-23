@@ -59,7 +59,7 @@ LOGGING = {
 
 # 🛡️ Segurança
 SECURITY = {
-    "maxFileSize": 50 * 1024 * 1024,  # 50MB
+    "maxFileSize": 1 * 1024 * 1024 * 1024,  # 1GB
     "allowedAudioTypes": [
         "audio/mp3", "audio/wav", "audio/m4a", "audio/ogg",
         "audio/ogg; codecs=opus", "audio/aac", "audio/webm",
@@ -87,11 +87,10 @@ NETWORK = {
 
 # 📝 Mensagens do Bot
 MESSAGES = {
-    "error": "❌ Ocorreu um erro inesperado. Tente novamente mais tarde.",
-    "audioError": "❌ Ocorreu um erro ao transcrever seu áudio.",
-    "invalidFile": "⚠️ O arquivo enviado não é um áudio válido.",
-    "success": "✅ Transcrição concluída!",
-    "welcome": "👋 Olá! Envie um áudio e eu transcrevo para você."
+    'audioError': "❌ Ocorreu um erro ao processar o áudio.",
+    'invalidFile': "⚠️ O arquivo enviado não é um áudio válido.",
+    'fileTooLarge': "⚠️ Este arquivo ultrapassa o limite de 1GB permitido.",
+    'welcome': "🎙️ Envie um áudio ou link para transcrição!"
 }
 
 # 🔧 Desenvolvimento

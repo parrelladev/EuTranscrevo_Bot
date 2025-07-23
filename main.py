@@ -1,49 +1,55 @@
 # main.py
 """
 🤖 BOT DE TRANSCRIÇÃO DE ÁUDIO PARA TELEGRAM
-
-- Conecta ao Telegram via pyTelegramBotAPI
-- Processa mensagens recebidas
-- Roteia comandos e áudios para as funções apropriadas
-
 Autor: parrelladev
 Versão: 1.0.0
 """
 
 import os
 import sys
+import re
+import telebot
 
-# Adiciona a raiz do projeto ao sys.path
+# Ajuste do path
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(ROOT_DIR)
 
-import telebot
 from config import TELEGRAM_TOKEN, MESSAGES
-
-# Comandos
 from commands.transcrever import transcrever
 from commands.boas_vindas import boas_vindas
+from commands.transcrever_link import transcrever_link
+
+# Regex para detectar links
+URL_REGEX = re.compile(r'(https?://[^\s]+)')
 
 # Inicializa o bot
 bot = telebot.TeleBot(TELEGRAM_TOKEN)
 
-# Handler de texto
+# Handler de mensagens de texto
 @bot.message_handler(content_types=['text'])
 def handle_text(message):
     try:
-        boas_vindas(bot, message)
+        texto = message.text.strip()
+        print(f"📨 Texto recebido: {repr(texto)}")
+
+        if URL_REGEX.search(texto):
+            print("🔗 Link detectado, iniciando transcrição via link...")
+            transcrever_link(bot, message)
+        else:
+            print("👋 Mensagem padrão recebida, chamando boas_vindas...")
+            boas_vindas(bot, message)
     except Exception as e:
-        print("Erro ao processar texto:", e)
+        print("❌ Erro ao processar texto:", e)
         bot.reply_to(message, MESSAGES['error'])
 
-# Handler de voz, áudio, vídeo, documento
+# Handler para voz, áudio, vídeo, vídeo curto e documentos
 @bot.message_handler(content_types=['voice', 'audio', 'video', 'video_note', 'document'])
-def handle_audio_or_video(message):
+def handle_media(message):
     try:
-        print("🎧 Mídia recebida!")
+        print(f"🎧 Mídia recebida: {message.content_type}")
         transcrever(bot, message)
     except Exception as e:
-        print("Erro ao processar mídia:", e)
+        print("❌ Erro ao processar mídia:", e)
         bot.reply_to(message, MESSAGES['audioError'])
 
 # Inicializa o bot
