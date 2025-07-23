@@ -39,15 +39,15 @@ REPLICATE = {
         "temperature_increment_on_fallback": 0.2
     },
     "polling": {
-        "maxAttempts": 30,
-        "interval": 2000,
-        "timeout": 60000
+        "maxAttempts": 150,     # 150 tentativas
+        "interval": 2000,       # 2 segundos entre cada uma (em milissegundos)
+        "timeout": 300000       # 5 minutos em milissegundos (opcional, apenas para referência)
     }
 }
 
 # 📱 Comandos do Bot
 COMMANDS = {
-    "ping": "/ping"
+    "donate": "/pix"
 }
 
 # 📊 Logging

@@ -14,10 +14,11 @@ import telebot
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(ROOT_DIR)
 
-from config import TELEGRAM_TOKEN, MESSAGES
+from config import TELEGRAM_TOKEN, MESSAGES, COMMANDS
 from commands.transcrever import transcrever
 from commands.boas_vindas import boas_vindas
 from commands.transcrever_link import transcrever_link
+from commands.donate import responder_doacao
 
 # Regex para detectar links
 URL_REGEX = re.compile(r'(https?://[^\s]+)')
@@ -25,7 +26,12 @@ URL_REGEX = re.compile(r'(https?://[^\s]+)')
 # Inicializa o bot
 bot = telebot.TeleBot(TELEGRAM_TOKEN)
 
-# Handler de mensagens de texto
+# Handler de mensagens de doação
+@bot.message_handler(commands=['pix', 'donate'])
+def handle_donate(message):
+    responder_doacao(bot, message)
+
+# Handler de link externo
 @bot.message_handler(content_types=['text'])
 def handle_text(message):
     try:
