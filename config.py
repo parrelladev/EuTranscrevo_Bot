@@ -11,7 +11,7 @@ load_dotenv()  # Carrega variáveis do .env
 # 🎛️ Configurações de Áudio
 AUDIO = {
     "optimization": {
-        "speed": 1.0,
+        "speed": 2.0,
         "volume": 1.0,
         "bitrate": "32k",
         "channels": 1,
@@ -39,9 +39,9 @@ REPLICATE = {
         "temperature_increment_on_fallback": 0.2
     },
     "polling": {
-        "maxAttempts": 150,     # 150 tentativas
+        "maxAttempts": 450,     # 450 tentativas
         "interval": 2000,       # 2 segundos entre cada uma (em milissegundos)
-        "timeout": 300000       # 5 minutos em milissegundos (opcional, apenas para referência)
+        "timeout": 900000       # 15 minutos em milissegundos (apenas para referência)
     }
 }
 

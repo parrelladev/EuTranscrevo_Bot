@@ -6,10 +6,18 @@ Autor: parrelladev
 
 import os
 import time
+from telebot.apihelper import ApiTelegramException
 
 from config import AUDIO, MESSAGES
 from services.audio_pipeline import processar_audio
 from utils.file_utils import ensure_directory_exists
+
+
+def enviar_mensagem_dividida(bot, chat_id, texto, limite=4000):
+    partes = [texto[i:i+limite] for i in range(0, len(texto), limite)]
+    for parte in partes:
+        bot.send_message(chat_id, parte)
+
 
 def transcrever(bot, message):
     try:
@@ -51,10 +59,18 @@ def transcrever(bot, message):
         # 🔁 Usa pipeline reutilizável
         transcript = processar_audio(original_path)
 
-        # Resposta e limpeza
+        # Limpa mensagem temporária
         bot.delete_message(message.chat.id, status_msg.message_id)
-        bot.reply_to(message, f"{transcript}")
 
+        # Envia transcrição dividida caso exceda o limite do Telegram
+        enviar_mensagem_dividida(bot, message.chat.id, transcript)
+
+    except ApiTelegramException as api_err:
+        print("⚠️ Erro API Telegram:", api_err)
+        bot.reply_to(message, "⚠️ Não consegui enviar toda a transcrição. O texto é muito grande.")
     except Exception as e:
         print("❌ Erro ao transcrever:", e)
-        bot.reply_to(message, MESSAGES['audioError'])
+        if "Replicate" in str(e):
+            bot.reply_to(message, "⚠️ O processamento demorou muito e foi interrompido. Por favor, tente dividir o áudio.")
+        else:
+            bot.reply_to(message, MESSAGES['audioError'])
