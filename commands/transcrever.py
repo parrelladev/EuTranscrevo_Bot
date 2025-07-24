@@ -14,9 +14,9 @@ from utils.file_utils import ensure_directory_exists
 
 
 def enviar_mensagem_dividida(bot, chat_id, texto, limite=4000, reply_to_id=None):
-    partes = [texto[i:i+limite] for i in range(0, len(texto), limite)]
+    partes = [texto[i:i + limite] for i in range(0, len(texto), limite)]
     for idx, parte in enumerate(partes):
-        if idx == 0 and len(partes) > 1 and reply_to_id is not None:
+        if idx == 0 and reply_to_id is not None:
             bot.send_message(chat_id, parte, reply_to_message_id=reply_to_id)
         else:
             bot.send_message(chat_id, parte)
