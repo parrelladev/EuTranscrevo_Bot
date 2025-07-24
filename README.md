@@ -63,6 +63,7 @@ REPLICATE_TOKEN=seu_token_replicate
 ```
 📁 EuTranscrevo_Bot/
 ├── 📁 commands/
+│   ├── 📝 codigo_projeto.py
 │   ├── 📝 donate.py
 │   ├── 📝 transcrever.py
 │   ├── 🔗 transcrever_link.py
