@@ -13,10 +13,13 @@ from services.audio_pipeline import processar_audio
 from utils.file_utils import ensure_directory_exists
 
 
-def enviar_mensagem_dividida(bot, chat_id, texto, limite=4000):
+def enviar_mensagem_dividida(bot, chat_id, texto, limite=4000, reply_to_id=None):
     partes = [texto[i:i+limite] for i in range(0, len(texto), limite)]
-    for parte in partes:
-        bot.send_message(chat_id, parte)
+    for idx, parte in enumerate(partes):
+        if idx == 0 and len(partes) > 1 and reply_to_id is not None:
+            bot.send_message(chat_id, parte, reply_to_message_id=reply_to_id)
+        else:
+            bot.send_message(chat_id, parte)
 
 
 def transcrever(bot, message):
@@ -63,7 +66,7 @@ def transcrever(bot, message):
         bot.delete_message(message.chat.id, status_msg.message_id)
 
         # Envia transcrição dividida caso exceda o limite do Telegram
-        enviar_mensagem_dividida(bot, message.chat.id, transcript)
+        enviar_mensagem_dividida(bot, message.chat.id, transcript, reply_to_id=message.message_id)
 
     except ApiTelegramException as api_err:
         print("⚠️ Erro API Telegram:", api_err)
