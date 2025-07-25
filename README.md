@@ -12,7 +12,7 @@ Um bot de Telegram que transcreve áudios, vídeos e **links com mídia** usando
 - 🎛️ Otimização de mídia com FFmpeg para reduzir custos e melhorar performance
 - 🌐 Suporte a múltiplos formatos: `.mp3`, `.wav`, `.ogg`, `.m4a`, `.mp4`, etc.
 - 💬 Mensagens de boas-vindas e feedback em tempo real
-- 🔐 Validação de tipo e tamanho de arquivo (até 1GB ou mais)
+- 🔐 Validação de tipo e tamanho de arquivo (até 20MB)
 - 🧹 Limpeza automática de arquivos temporários
 
 ---
