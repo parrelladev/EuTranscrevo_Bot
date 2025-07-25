@@ -59,7 +59,7 @@ LOGGING = {
 
 # 🛡️ Segurança
 SECURITY = {
-    "maxFileSize": 1 * 1024 * 1024 * 1024,  # 1GB
+    "maxFileSize": 20 * 1024 * 1024,  # 20MB
     "allowedAudioTypes": [
         "audio/mp3", "audio/wav", "audio/m4a", "audio/ogg",
         "audio/ogg; codecs=opus", "audio/aac", "audio/webm",
@@ -89,7 +89,9 @@ NETWORK = {
 MESSAGES = {
     'audioError': "❌ Ocorreu um erro ao processar o áudio.",
     'invalidFile': "⚠️ O arquivo enviado não é um áudio válido.",
-    'fileTooLarge': "⚠️ Este arquivo ultrapassa o limite de 1GB permitido.",
+    'unsupportedMedia': '⚠️ Mídia não suportada.',
+    'fileTooLarge': "⚠️ Este arquivo ultrapassa o limite de 20MB permitido.",
+    'slowProcessing':"⚠️ O processamento demorou muito e foi interrompido. Por favor, tente dividir o áudio.",
     'welcome': "🎙️ Envie um áudio ou link para transcrição!"
 }
 
