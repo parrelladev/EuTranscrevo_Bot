@@ -14,6 +14,7 @@ import subprocess
 
 from config import AUDIO, MESSAGES
 from services.audio_pipeline import processar_audio
+from services.messaging import enviar_mensagem_dividida
 from utils.file_utils import ensure_directory_exists
 
 # Regex simples para capturar URLs
@@ -73,8 +74,8 @@ def transcrever_link(bot, message):
         bot.edit_message_text("⌛️ Transcrevendo áudio...", message.chat.id, status_msg.message_id)
         transcript = processar_audio(downloaded_path)
 
-        # Resposta final
-        bot.edit_message_text(transcript, message.chat.id, status_msg.message_id)
+        bot.delete_message(message.chat.id, status_msg.message_id)
+        enviar_mensagem_dividida(bot, message.chat.id, transcript, reply_to_id=message.message_id)
         log("✅ Transcrição enviada.")
 
     except subprocess.CalledProcessError as e:
