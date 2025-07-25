@@ -13,9 +13,9 @@ AUDIO = {
     "optimization": {
         "speed": 2.0,
         "volume": 1.0,
-        "bitrate": "32k",
+        "bitrate": "128k",
         "channels": 1,
-        "format": "mp3"
+        "format": "m4a"
     },
     "tempDir": "temp",
     "tempPrefix": "audio-transcribe"
